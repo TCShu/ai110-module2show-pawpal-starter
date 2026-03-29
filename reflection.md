@@ -12,10 +12,22 @@ Core actions a user should be able to perform (3):
 - See todo or task list of the day for each pet (has priority set by user)
 - Have a scheduling feature
 
+Owner — stores the person's name, free time, and their list of pets. It's the top-level object everything else connects to.
+
+Pet — stores a single animal's info and its list of care tasks. Can sort tasks by priority and sum up their total time.
+
+CareTask — one thing that needs to get done. Holds the title, duration, and priority. Gets a scheduled_time assigned by the Scheduler later.
+
+Scheduler — the logic class. Takes the Owner (and through it, all pets and tasks), builds a daily plan based on priority and available time, and can explain why tasks were chosen or skipped.
+
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+1. PRIORITY_RANK dictionary — was added at the top so get_tasks_by_priority() sorts by number rank, not alphabetically
+2. priority validation in CareTask.__init__ — would have raised a ValueError immediately if an invalid value is passed, catching typos early
+3. set_scheduled_time() on CareTask — gives the Scheduler a clean method to assign a time instead of directly mutating task.scheduled_time from outside the class
+4. Guards in generate_plan() — comments marking where to reset self.schedule before rebuilding and where to exit early if owner.pets is empty
 
 ---
 
