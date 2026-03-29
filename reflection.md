@@ -86,3 +86,48 @@ Scheduler — the logic class. Takes the Owner (and through it, all pets and tas
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+
+classDiagram
+    class Owner {
+        +String name
+        +int available_minutes
+        +List~Pet~ pets
+        +Dict preferences
+        +add_pet(pet: Pet)
+        +get_daily_availability() int
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +int age
+        +List~CareTask~ tasks
+        +add_task(task: CareTask)
+        +get_tasks_by_priority() List~CareTask~
+        +get_total_task_time() int
+    }
+
+    class CareTask {
+        +String title
+        +int duration_minutes
+        +String priority
+        +String scheduled_time
+        +bool is_completed
+        +mark_complete()
+        +to_dict() Dict
+    }
+
+    class Scheduler {
+        +Owner owner
+        +List schedule
+        +int total_time_used
+        +generate_plan()
+        +get_schedule() List
+        +explain_plan() String
+    }
+
+    Owner "1" --> "1..*" Pet : owns
+    Pet "1" --> "0..*" CareTask : has
+    Scheduler "1" --> "1" Owner : reads from
+    Scheduler "1" --> "1..*" Pet : schedules for
+
