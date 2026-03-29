@@ -7,6 +7,11 @@
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+Core actions a user should be able to perform (3):
+- Track pets in household (multiple pet care plans)
+- See todo or task list of the day for each pet (has priority set by user)
+- Have a scheduling feature
+
 **b. Design changes**
 
 - Did your design change during implementation?
